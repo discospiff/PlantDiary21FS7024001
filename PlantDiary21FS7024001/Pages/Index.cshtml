@@ -2,9 +2,10 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var brandName = ViewData["brandName"];
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to My Plant Diary</h1>
+    <h1 class="display-4">Welcome to @brandName</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
