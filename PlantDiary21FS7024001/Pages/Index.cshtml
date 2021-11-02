@@ -3,9 +3,37 @@
 @{
     ViewData["Title"] = "Home page";
     var brandName = ViewData["brandName"];
+    List<specimenfeed.Specimen> specimens = (List<specimenfeed.Specimen>)ViewData["Specimens"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @brandName</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="text-center">
+        <h1 class="display-4">Welcome to @brandName</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <div>
+            <table>
+                <tr>
+                    <th>Plant ID</th>
+                    <th>Specimen ID</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                </tr>
+                @{ 
+                    foreach(specimenfeed.Specimen specimen in specimens)
+                    {
+                                <tr>
+                                    <td>@specimen.PlantId</td>
+                                    <td>@specimen.SpecimenId</td>
+                                    <td>@specimen.Lat</td>
+                                    <td>@specimen.Lng</td>
+                                    <td>@specimen.Genus @specimen.Species @specimen.Common  </td>
+                                    <td>@specimen.Address</td>
+                                </tr>
+                    }
+                }
+            </table>
+
+
+        </div>
+    </div>
