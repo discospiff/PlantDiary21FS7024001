@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using plantfeed;
 using specimenfeed;
+using weatherfeed;
 
 namespace PlantDiary21FS7024001.Pages
 {
@@ -21,7 +22,7 @@ namespace PlantDiary21FS7024001.Pages
         }
 
         public void OnGet()
-        {
+        {   
             string brandName = Request.Query["BrandName"];
             int yearStarted = 2006;
             if (brandName == null || brandName.Length == 0) {
@@ -31,6 +32,24 @@ namespace PlantDiary21FS7024001.Pages
 
             using (var webClient = new WebClient())
             {
+                // read our weather API key.
+                string key = System.IO.File.ReadAllText("WeatherAPIKey.txt");
+                string weatherJSON = webClient.DownloadString("https://api.weatherbit.io/v2.0/current?&city=Cincinnati&country=USA&key="+key);
+                Weather weathers = Weather.FromJson(weatherJSON);
+                // store the precip.
+                long precip = 0;
+                foreach(weatherfeed.Datum weather in weathers.Data)
+                {
+                    precip = weather.Precip;
+                    if (precip < 1)
+                    {
+                        ViewData["Weather"] = "Need to Water";
+                    } else
+                    {
+                        ViewData["Weather"] = "Don't need to water.";
+                    }
+                }
+
                 // raw string data of plants that like water.
                 string plantsJSON = webClient.DownloadString("http://plantplaces.com/perl/mobile/viewplantsjsonarray.pl?WetTolerant=on");
 

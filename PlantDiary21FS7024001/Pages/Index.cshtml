@@ -4,11 +4,13 @@
     ViewData["Title"] = "Home page";
     var brandName = ViewData["brandName"];
     List<specimenfeed.Specimen> specimens = (List<specimenfeed.Specimen>)ViewData["Specimens"];
+    var water = ViewData["Weather"];
 }
 
     <div class="text-center">
         <h1 class="display-4">Welcome to @brandName</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <p>@water</p>
         <div>
             <table>
                 <tr>
