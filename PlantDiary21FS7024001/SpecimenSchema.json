@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/SpecimenCollection",
+  "definitions": {
+    "SpecimenCollection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "specimens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Specimen"
+          }
+        }
+      },
+      "required": [
+        "specimens"
+      ],
+      "title": "SpecimenCollection"
+    },
+    "Specimen": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lat": {
+          "type": "number",
+          "minimum": -100,
+          "maximum": 100
+        },
+        "lng": {
+          "type": "number",
+          "minimum": -150,
+          "maximum": 150
+        },
+        "plant_id": {
+          "type": "integer",
+           "minimum": 0
+        },
+        "specimen_id": {
+          "type": "integer"
+        },
+        "common": {
+          "type": "string"
+        },
+        "genus": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 65
+        },
+        "species": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "common",
+        "genus",
+        "lat",
+        "lng",
+        "notes",
+        "plant_id",
+        "species",
+        "specimen_id"
+      ],
+      "title": "Specimen"
+    }
+  }
+}

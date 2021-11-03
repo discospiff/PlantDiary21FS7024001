@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using plantfeed;
 using specimenfeed;
 using weatherfeed;
@@ -75,17 +77,41 @@ namespace PlantDiary21FS7024001.Pages
                 // let's get our specimens
                 List<Specimen> specimens = specimenCollection.Specimens;
 
-                // filter the specimens to those that like water.
-                List<Specimen> waterMeSpecimens = new List<Specimen>();
-                foreach(Specimen specimen in specimens)
-                {
-                    if(allPlants.ContainsKey(specimen.PlantId))
-                    {
-                        waterMeSpecimens.Add(specimen);
-                    }
-                }
+                // read the schema.
+                JSchema schema = JSchema.Parse(System.IO.File.ReadAllText("SpecimenSchema.json"));
 
-                ViewData["Specimens"] = waterMeSpecimens;
+                // Parse our incoming JSON against the schema.
+                JObject jsonObject = JObject.Parse(specimenJSON);
+
+                // a list of reasons why the JSON is not valid.
+                IList<string> validationEvents = new List<string>();
+
+                if (jsonObject.IsValid(schema, out validationEvents))
+                {
+                    // parse out the specimens.
+                    // filter the specimens to those that like water.
+                    List<Specimen> waterMeSpecimens = new List<Specimen>();
+                    foreach (Specimen specimen in specimens)
+                    {
+                        if (allPlants.ContainsKey(specimen.PlantId))
+                        {
+                            waterMeSpecimens.Add(specimen);
+                        }
+                    }
+
+                    ViewData["Specimens"] = waterMeSpecimens;
+                } 
+                else
+                {
+                    string error = "";
+                    foreach(string evt in validationEvents)
+                    {
+                        error = error + evt;
+                        ViewData["Error"] = error;
+                    }
+                    ViewData["Specimens"] = new List<Specimen>();
+                }
+                
             }
 
         }
