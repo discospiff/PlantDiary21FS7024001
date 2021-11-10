@@ -24,29 +24,25 @@ namespace PlantDiary21FS7024001.Pages
         }
 
         public void OnGet()
-        {   
-            string brandName = Request.Query["BrandName"];
-            int yearStarted = 2006;
-            if (brandName == null || brandName.Length == 0) {
-                brandName = "My Plant Diary";
-            }
-            ViewData["brandName"] = brandName + yearStarted;
+        {
+            GenerateBrand();
 
             using (var webClient = new WebClient())
             {
                 // read our weather API key.
                 string key = System.IO.File.ReadAllText("WeatherAPIKey.txt");
-                string weatherJSON = webClient.DownloadString("https://api.weatherbit.io/v2.0/current?&city=Cincinnati&country=USA&key="+key);
+                string weatherJSON = webClient.DownloadString("https://api.weatherbit.io/v2.0/current?&city=Cincinnati&country=USA&key=" + key);
                 Weather weathers = Weather.FromJson(weatherJSON);
                 // store the precip.
                 long precip = 0;
-                foreach(weatherfeed.Datum weather in weathers.Data)
+                foreach (weatherfeed.Datum weather in weathers.Data)
                 {
                     precip = weather.Precip;
                     if (precip < 1)
                     {
                         ViewData["Weather"] = "Need to Water";
-                    } else
+                    }
+                    else
                     {
                         ViewData["Weather"] = "Don't need to water.";
                     }
@@ -62,7 +58,7 @@ namespace PlantDiary21FS7024001.Pages
                 IDictionary<long, Plant> allPlants = new Dictionary<long, Plant>();
 
                 // load the plants into the dictionary.
-                foreach(Plant plant in plants)
+                foreach (Plant plant in plants)
                 {
                     allPlants.Add(plant.Id, plant);
                 }
@@ -78,7 +74,8 @@ namespace PlantDiary21FS7024001.Pages
                 List<Specimen> specimens = specimenCollection.Specimens;
 
                 // read the schema.
-                JSchema schema = JSchema.Parse(System.IO.File.ReadAllText("SpecimenSchema.json"));
+                string specimenSchema = System.IO.File.ReadAllText("SpecimenSchema.json");
+                JSchema schema = JSchema.Parse(specimenSchema);
 
                 // Parse our incoming JSON against the schema.
                 JObject jsonObject = JObject.Parse(specimenJSON);
@@ -100,20 +97,31 @@ namespace PlantDiary21FS7024001.Pages
                     }
 
                     ViewData["Specimens"] = waterMeSpecimens;
-                } 
+                }
                 else
                 {
                     string error = "";
-                    foreach(string evt in validationEvents)
+                    foreach (string evt in validationEvents)
                     {
                         error = error + evt;
                         ViewData["Error"] = error;
                     }
                     ViewData["Specimens"] = new List<Specimen>();
                 }
-                
+
             }
 
+        }
+
+        private void GenerateBrand()
+        {
+            string brandName = Request.Query["BrandName"];
+            int yearStarted = 2006;
+            if (brandName == null || brandName.Length == 0)
+            {
+                brandName = "My Plant Diary";
+            }
+            ViewData["brandName"] = brandName + yearStarted;
         }
     }
 }
