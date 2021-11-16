@@ -24,8 +24,8 @@
       "properties": {
         "lat": {
           "type": "number",
-          "minimum": 50,
-          "maximum": 100
+          "minimum": -180,
+          "maximum": 180
         },
         "lng": {
           "type": "number",
