@@ -24,7 +24,7 @@
       "properties": {
         "lat": {
           "type": "number",
-          "minimum": -100,
+          "minimum": 50,
           "maximum": 100
         },
         "lng": {
