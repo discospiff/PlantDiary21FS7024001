@@ -1,0 +1,20 @@
+﻿body {
+    background-color: #F2C849;
+    color: #734053;
+}
+#topnav {
+    color: #F2C849;
+    background-color: #734053;
+    border: groove;
+    margin-top: 0px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    height: 3em;
+    z-index: 100;
+}
+.content {
+    position:relative;
+    margin-top:4em;
+}
