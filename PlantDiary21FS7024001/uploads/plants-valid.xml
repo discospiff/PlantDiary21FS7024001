@@ -2,7 +2,6 @@
 <plant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="plants.xsd">
 	<genus>Cercis</genus>
-	<foo>bar</foo>
 	<species>canadensis</species>
 	<common_name>Eastern Redbud</common_name>
 	<height>10</height>
