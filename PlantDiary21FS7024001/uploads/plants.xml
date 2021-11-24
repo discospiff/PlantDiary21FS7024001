@@ -1,0 +1,33 @@
+﻿<?xml version="1.0"?>
+<plant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="plants.xsd">
+  <genus>Cercis</genus>
+  <species>canadensis</species>
+  <common_name>Eastern Redbud</common_name>
+  <height>5</height>
+  <begin_bloom_date>2021-03-15</begin_bloom_date>
+  <end_bloom_date>2020-02-29</end_bloom_date>
+  <edible>true</edible>
+  <sun_tolerance>part_shade</sun_tolerance>
+  <bloom_color>pink</bloom_color>
+  <specimens>
+    <specimen>
+      <latitude>39.47</latitude>
+      <longitude>-84.51</longitude>
+      <planted_by>Brandan Jones</planted_by>
+      <comments>A beautiful Tree.</comments>
+    </specimen>
+    <specimen>
+      <latitude>52.40</latitude>
+      <longitude>1.52</longitude>
+      <planted_by>Joe Bloggs</planted_by>
+      <comments>RGB Kew</comments>
+    </specimen>
+    <specimen>
+      <latitude>-25.50</latitude>
+      <longitude>38.25</longitude>
+      <planted_by>David Jones</planted_by>
+      <comments>Syndey Botanic Gardens</comments>
+    </specimen>
+  </specimens>
+</plant>

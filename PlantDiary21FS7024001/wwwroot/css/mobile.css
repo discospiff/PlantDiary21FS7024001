@@ -18,10 +18,3 @@
     position:relative;
     margin-top:4em;
 }
-.mobileonly {
-    display: none;
-}
-.content ul li {
-    color: darkgreen;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-}

@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <title>PlantPlaces.com</title>
-    <link rel="stylesheet" href="css/styles.css" type="text/css" />
+    <link rel="stylesheet" media="screen" href="css/styles.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-device-width: 480px)" href="css/mobile.css" type="text/css" />
+    <link rel="stylesheet" media="print" href="css/print.css" type="text/css" />
 </head>
 <body>
     <div id="topnav">
@@ -23,12 +25,23 @@
             <li><a href="https://www.plantplaces.com/perl/viewplantdetails.pl?filter=plant&plant_ID=83&Region=&Region_Search=&fullname=Cercis%20canadensis%20%20Eastern%20Redbud">Eastern Redbud</a></li>
         </ul>
         <img src="img/Brandan.jpg" alt="Brandan in front of the Sydney Opera House" />
+        <div>
+            <form action="https://www.plantplaces.com/perl/viewplants.pl" method="post">
+                <input type="text" name="Name_Search" placeholder="Enter Plant Name" />
+                <input type="submit" />
+            </form>
+        </div>
     </div>
     <div>
-        <form action="https://www.plantplaces.com/perl/viewplants.pl" method="post">
-            <input type="text" name="Name_Search" placeholder="Enter Plant Name"/>
-            <input  type="submit"/>
-        </form>
+        <h2>We are people who care about plants.</h2>
+        <ul>
+            <li>Brandan Jones</li>
+            <li>Checkers Jenkins</li>
+            <li>Arfthur J Rooney</li>
+        </ul>
+    </div>
+    <div class="mobileonly">
+        <h2>Download our app for an optimized experience!</h2>
     </div>
 </body>
 </html>
